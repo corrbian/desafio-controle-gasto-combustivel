@@ -1,0 +1,6 @@
+c:\projects\ControleGastosCombustivel\ConsoleApplication\bin\Debug\ControleDeGastos.exe.config
+c:\projects\ControleGastosCombustivel\ConsoleApplication\bin\Debug\ControleDeGastos.exe
+c:\projects\ControleGastosCombustivel\ConsoleApplication\bin\Debug\ControleDeGastos.pdb
+c:\projects\ControleGastosCombustivel\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
+c:\projects\ControleGastosCombustivel\ConsoleApplication\obj\Debug\ControleDeGastos.exe
+c:\projects\ControleGastosCombustivel\ConsoleApplication\obj\Debug\ControleDeGastos.pdb

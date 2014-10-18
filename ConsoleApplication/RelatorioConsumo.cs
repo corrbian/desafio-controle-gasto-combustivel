@@ -23,8 +23,8 @@ namespace ControleDeGastos
 	{
 		public string Marca { get; set; }
 		public string Modelo { get; set; }
-		public string KM { get; set; }
-		public string ValorGasto { get; set; }
+		public float KM { get; set; }
+		public Decimal ValorGasto { get; set; }
 		public float Litros { get; set; }
 		public DateTime DataInicial { get; set; }
 		public int Dias { get; set; }

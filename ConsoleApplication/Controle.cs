@@ -39,8 +39,13 @@ namespace ControleDeGastos
 					Marca = veiculo.Marca,
 					Modelo = veiculo.Modelo,
 					DataInicial = BuscaPrimeiroAbastecimento(veiculo.Abastecimentos),
-					Dias = BuscaIntervaloDias(veiculo.Abastecimentos),
+					Dias = CalculaIntervaloDias(veiculo.Abastecimentos),
+					KM = CalculaKmsPercorridos(veiculo.Abastecimentos),
+					Litros = BuscaQuantidadeLitrosAbastecidos(veiculo.Abastecimentos),
+					ValorGasto = CalculaValorGasto(veiculo.Abastecimentos),
 				};
+				consumo.MediaKmL = consumo.KM / consumo.Litros;
+				consumo.ValorGastoKmL = float.Parse(consumo.ValorGasto.ToString()) / consumo.KM;
 				listaDeConsumo.Add(consumo);
 			}
 
@@ -71,12 +76,11 @@ namespace ControleDeGastos
 
 			//System.Console.WriteLine(veiculo.Marca + " " + veiculo.Modelo + " abatecimentos: " + veiculo.Abastecimentos.Count);
 		}
-
 		DateTime BuscaPrimeiroAbastecimento(IList<Abastatecimento> abastecimentos)
 		{
 			return abastecimentos.OrderBy(w => w.Data).FirstOrDefault().Data;
 		}
-		int BuscaIntervaloDias(IList<Abastatecimento> abastecimentos)
+		int CalculaIntervaloDias(IList<Abastatecimento> abastecimentos)
 		{
 			DateTime dataInicial = BuscaPrimeiroAbastecimento(abastecimentos);
 			
@@ -87,6 +91,28 @@ namespace ControleDeGastos
 					totalDays = (item.Data - dataInicial).Days;
 			}
 			return totalDays;
+		}
+		float CalculaKmsPercorridos(IList<Abastatecimento> abastecimentos)
+		{
+			float kmInicial = abastecimentos.OrderBy(w => w.Quilometragem).FirstOrDefault().Quilometragem;
+			float kmFinal = abastecimentos.OrderByDescending(w => w.Quilometragem).FirstOrDefault().Quilometragem;
+			return kmFinal - kmInicial;
+		}
+		float BuscaQuantidadeLitrosAbastecidos(IList<Abastatecimento> abastecimentos)
+		{
+			float litros = 0;
+			foreach (Abastatecimento item in abastecimentos)
+				litros += item.Combustivel;
+
+			return litros;
+		}
+		Decimal CalculaValorGasto(IList<Abastatecimento> abastecimentos)
+		{
+			decimal valor = 0;
+			foreach (Abastatecimento item in abastecimentos)
+				valor += (item.Preco * Convert.ToDecimal(item.Combustivel));
+
+			return valor;
 		}
 	}
 }

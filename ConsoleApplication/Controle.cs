@@ -72,8 +72,6 @@ namespace ControleDeGastos
 				Console.WriteLine(relatorio.ToString());
 			}
 			//"Honda","City 1.5","564","221.06","73.71","2012-09- 13","22","7.65","7.50","7.80","0.39"
-
-
 			//System.Console.WriteLine(veiculo.Marca + " " + veiculo.Modelo + " abatecimentos: " + veiculo.Abastecimentos.Count);
 		}
 		DateTime BuscaPrimeiroAbastecimento(IList<Abastatecimento> abastecimentos)

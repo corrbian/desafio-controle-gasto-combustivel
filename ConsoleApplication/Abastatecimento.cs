@@ -19,7 +19,7 @@ You should have received a copy of the GNU General Public License
 using System;
 namespace ControleDeGastos
 {
-	public class Abastatecimento
+	public class Abastecimento
 	{
 		/// <summary>
 		/// Quantidade de litros que foi abastecido

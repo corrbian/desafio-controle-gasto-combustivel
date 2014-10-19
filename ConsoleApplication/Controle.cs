@@ -43,6 +43,7 @@ namespace ControleDeGastos
 					KM = CalculaKmsPercorridos(veiculo.Abastecimentos),
 					Litros = BuscaQuantidadeLitrosAbastecidos(veiculo.Abastecimentos),
 					ValorGasto = CalculaValorGasto(veiculo.Abastecimentos),
+					MelhorKmL = CalculaMelhorKmL(veiculo.Abastecimentos),
 				};
 				consumo.MediaKmL = consumo.KM / consumo.Litros;
 				consumo.ValorGastoKmL = float.Parse(consumo.ValorGasto.ToString()) / consumo.KM;
@@ -74,42 +75,59 @@ namespace ControleDeGastos
 			//"Honda","City 1.5","564","221.06","73.71","2012-09- 13","22","7.65","7.50","7.80","0.39"
 			//System.Console.WriteLine(veiculo.Marca + " " + veiculo.Modelo + " abatecimentos: " + veiculo.Abastecimentos.Count);
 		}
-		DateTime BuscaPrimeiroAbastecimento(IList<Abastatecimento> abastecimentos)
+		DateTime BuscaPrimeiroAbastecimento(IList<Abastecimento> abastecimentos)
 		{
 			return abastecimentos.OrderBy(w => w.Data).FirstOrDefault().Data;
 		}
-		int CalculaIntervaloDias(IList<Abastatecimento> abastecimentos)
+		int CalculaIntervaloDias(IList<Abastecimento> abastecimentos)
 		{
 			DateTime dataInicial = BuscaPrimeiroAbastecimento(abastecimentos);
 			
 			int totalDays = 0;
-			foreach (Abastatecimento item in abastecimentos)
+			foreach (Abastecimento item in abastecimentos)
 			{
 				if (item.Data > dataInicial)
 					totalDays = (item.Data - dataInicial).Days;
 			}
 			return totalDays;
 		}
-		float CalculaKmsPercorridos(IList<Abastatecimento> abastecimentos)
+		float CalculaKmsPercorridos(IList<Abastecimento> abastecimentos)
 		{
 			float kmInicial = abastecimentos.OrderBy(w => w.Quilometragem).FirstOrDefault().Quilometragem;
 			float kmFinal = abastecimentos.OrderByDescending(w => w.Quilometragem).FirstOrDefault().Quilometragem;
 			return kmFinal - kmInicial;
 		}
-		float BuscaQuantidadeLitrosAbastecidos(IList<Abastatecimento> abastecimentos)
+		float BuscaQuantidadeLitrosAbastecidos(IList<Abastecimento> abastecimentos)
 		{
 			float litros = 0;
-			foreach (Abastatecimento item in abastecimentos)
+			foreach (Abastecimento item in abastecimentos)
 				litros += item.Combustivel;
 
 			return litros;
 		}
-		Decimal CalculaValorGasto(IList<Abastatecimento> abastecimentos)
+		Decimal CalculaValorGasto(IList<Abastecimento> abastecimentos)
 		{
 			decimal valor = 0;
-			foreach (Abastatecimento item in abastecimentos)
+			foreach (Abastecimento item in abastecimentos)
 				valor += (item.Preco * Convert.ToDecimal(item.Combustivel));
 
+			return valor;
+		}
+		float CalculaMelhorKmL(IList<Abastecimento> abastecimentos)
+		{
+			float valor = 0;
+			float ultimoKmAbastecido = 0;
+			//ordenar por data
+			List<Abastecimento> list = abastecimentos.OrderBy(w => w.Data).ToList<Abastecimento>();
+			
+			for (int index = 0; index < list.Count; index++)
+			{
+				if (ultimoKmAbastecido == 0)
+				{
+					ultimoKmAbastecido = list[index].Quilometragem;
+					continue;
+				}
+			}
 			return valor;
 		}
 	}

@@ -32,6 +32,6 @@ namespace ControleDeGastos
 		/// <summary>
 		/// Lista de abastecimentos que foi realizado no veículo
 		/// </summary>
-		public List<Abastatecimento> Abastecimentos { get; set; }
+		public List<Abastecimento> Abastecimentos { get; set; }
 	}
 }

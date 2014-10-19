@@ -40,7 +40,7 @@ namespace ControleDeGastos
 				{// Não foi importado registro deste veículo ainda
 					//Instancia os objetos a serem utilizados
 					veiculo = new Veiculo();
-					veiculo.Abastecimentos = new List<Abastatecimento>();
+					veiculo.Abastecimentos = new List<Abastecimento>();
 					//Lê os registros
 					veiculo.Marca = RemoveAspas(coluna[0]);
 					veiculo.Modelo = RemoveAspas(coluna[1]);
@@ -59,10 +59,10 @@ namespace ControleDeGastos
 			return veiculoLst;
 		}
 
-		Abastatecimento LeDadosAbastecimento(string[] coluna)
+		Abastecimento LeDadosAbastecimento(string[] coluna)
 		{
 			System.Globalization.NumberStyles numberStyle = System.Globalization.NumberStyles.AllowDecimalPoint;
-			return new Abastatecimento()
+			return new Abastecimento()
 			{
 				Combustivel = float.Parse(RemoveAspas(coluna[4]), numberStyle, System.Globalization.CultureInfo.InvariantCulture),
 				Data = DateTime.Parse(RemoveAspas(coluna[2])),

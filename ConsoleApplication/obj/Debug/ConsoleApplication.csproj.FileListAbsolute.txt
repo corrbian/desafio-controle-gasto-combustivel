@@ -4,9 +4,9 @@ c:\projects\ControleGastosCombustivel\ConsoleApplication\bin\Debug\ControleDeGas
 c:\projects\ControleGastosCombustivel\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
 c:\projects\ControleGastosCombustivel\ConsoleApplication\obj\Debug\ControleDeGastos.exe
 c:\projects\ControleGastosCombustivel\ConsoleApplication\obj\Debug\ControleDeGastos.pdb
-C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\bin\Debug\ControleDeGastos.exe.config
-C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\obj\Debug\ControleDeGastos.exe
-C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\obj\Debug\ControleDeGastos.pdb
-C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\bin\Debug\ControleDeGastos.exe
-C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\bin\Debug\ControleDeGastos.pdb
 C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
+C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\bin\Debug\LogCombustivel.exe.config
+C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\bin\Debug\LogCombustivel.exe
+C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\bin\Debug\LogCombustivel.pdb
+C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\obj\Debug\LogCombustivel.exe
+C:\Users\Fabian\Documents\GitHub\desafio-controle-gasto-combustivel\ConsoleApplication\obj\Debug\LogCombustivel.pdb

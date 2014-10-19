@@ -37,17 +37,16 @@ namespace ControleDeGastos
 		static void Main(string[] args)
 		{
 			//Solicitar ao usuário depois
-			string caminhoArquivo = String.Empty;
-
+			Console.Write("Digite o local onde está o arquivo para ser importado: ");
+			string caminhoArquivo = Console.ReadLine();
 #if DEBUG
-			caminhoArquivo = @"C:\temp\gastos\LogCombustivel.csv"; 
+			caminhoArquivo = @"C:\temp\gastos\LogCombustivel.csv";
 #endif
 
 			if (string.IsNullOrEmpty(caminhoArquivo))
 				Console.WriteLine("Caminho para o arquivo não foi informado.");
-
-			if (!System.IO.File.Exists(caminhoArquivo))
-				Console.WriteLine("Caminho inexistente.");
+			else if (!System.IO.File.Exists(caminhoArquivo))
+				Console.WriteLine("Arquivo não encontrado.");
 			else
 			{
 				Controle control = new Controle();

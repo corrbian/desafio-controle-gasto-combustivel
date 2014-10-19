@@ -44,6 +44,7 @@ namespace ControleDeGastos
 					Litros = BuscaQuantidadeLitrosAbastecidos(veiculo.Abastecimentos),
 					ValorGasto = CalculaValorGasto(veiculo.Abastecimentos),
 					MelhorKmL = CalculaMelhorKmL(veiculo.Abastecimentos),
+					PiorKmL = CalculaPiorKmL(veiculo.Abastecimentos),
 				};
 				consumo.MediaKmL = consumo.KM / consumo.Litros;
 				consumo.ValorGastoKmL = float.Parse(consumo.ValorGasto.ToString()) / consumo.KM;
@@ -115,20 +116,37 @@ namespace ControleDeGastos
 		}
 		float CalculaMelhorKmL(IList<Abastecimento> abastecimentos)
 		{
-			float valor = 0;
-			float ultimoKmAbastecido = 0;
+			float valorAtual = 0;
+			float melhorKmL = 0;
 			//ordenar por data
-			List<Abastecimento> list = abastecimentos.OrderBy(w => w.Data).ToList<Abastecimento>();
+			List<Abastecimento> listaDeAbastecimentos = abastecimentos.OrderBy(w => w.Data).ToList<Abastecimento>();
 			
-			for (int index = 0; index < list.Count; index++)
+			for (int index = 1; index < listaDeAbastecimentos.Count; index++)
 			{
-				if (ultimoKmAbastecido == 0)
-				{
-					ultimoKmAbastecido = list[index].Quilometragem;
-					continue;
-				}
+				float kmPercorrido = listaDeAbastecimentos[index].Quilometragem - listaDeAbastecimentos[index - 1].Quilometragem;
+				valorAtual = kmPercorrido / listaDeAbastecimentos[index - 1].Combustivel;
+
+				if ((melhorKmL == 0) || (valorAtual < melhorKmL))
+					melhorKmL = valorAtual;
 			}
-			return valor;
+			return melhorKmL;
+		}
+		float CalculaPiorKmL(IList<Abastecimento> abastecimentos)
+		{
+			float valorAtual = 0;
+			float piorKmL = 0;
+			//ordenar por data
+			List<Abastecimento> listaDeAbastecimentos = abastecimentos.OrderBy(w => w.Data).ToList<Abastecimento>();
+
+			for (int index = 1; index < listaDeAbastecimentos.Count; index++)
+			{
+				float kmPercorrido = listaDeAbastecimentos[index].Quilometragem - listaDeAbastecimentos[index - 1].Quilometragem;
+				valorAtual = kmPercorrido / listaDeAbastecimentos[index - 1].Combustivel;
+
+				if ((piorKmL == 0) || (valorAtual > piorKmL))
+					piorKmL = valorAtual;
+			}
+			return piorKmL;
 		}
 	}
 }

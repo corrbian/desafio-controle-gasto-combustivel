@@ -56,25 +56,35 @@ namespace ControleDeGastos
 
 		void GerarRelatorio(IList<Consumo> listaDeConsumo)
 		{
-			Console.WriteLine("MARCA\t\tMODELO\t\tKM\t\tR$\t\tLITROS\tDATAINI\tDIAS\tMEDIAKM/L\t\tPIORKM/L\t\tMELHORKM/L\t\tR$/KM");
-			foreach (Consumo consumo in listaDeConsumo)
+			try
 			{
-				StringBuilder relatorio = new StringBuilder();
-				relatorio.AppendFormat("\"{0}\",", consumo.Marca);
-				relatorio.AppendFormat("\"{0}\",", consumo.Modelo);
-				relatorio.AppendFormat("\"{0}\",", consumo.KM);
-				relatorio.AppendFormat("\"{0}\",", consumo.ValorGasto);
-				relatorio.AppendFormat("\"{0}\",", consumo.Litros);
-				relatorio.AppendFormat("\"{0}\",", consumo.DataInicial);
-				relatorio.AppendFormat("\"{0}\",", consumo.Dias);
-				relatorio.AppendFormat("\"{0}\",", consumo.MediaKmL);
-				relatorio.AppendFormat("\"{0}\",", consumo.PiorKmL);
-				relatorio.AppendFormat("\"{0}\",", consumo.MelhorKmL);
-				relatorio.AppendFormat("\"{0}\"", consumo.ValorGastoKmL);
-				Console.WriteLine(relatorio.ToString());
+				StringBuilder relatorioConsumo = new StringBuilder();
+				relatorioConsumo.AppendLine("\"MARCA\",\"MODELO\",\"KM\",\"R$\",\"LITROS\",\"DATAINI\",\"DIAS\",\"MEDIAKM/L\",\"PIORKM/L\",\"MELHORKM/L\",\"R$/KM\"");
+				foreach (Consumo consumo in listaDeConsumo)
+				{
+					StringBuilder relatorio = new StringBuilder();
+					relatorio.AppendFormat("\"{0}\",", consumo.Marca);
+					relatorio.AppendFormat("\"{0}\",", consumo.Modelo);
+					relatorio.AppendFormat("\"{0}\",", consumo.KM);
+					relatorio.AppendFormat("\"{0}\",", consumo.ValorGasto);
+					relatorio.AppendFormat("\"{0}\",", consumo.Litros);
+					relatorio.AppendFormat("\"{0}\",", consumo.DataInicial.ToString("yyyy-MM-dd"));
+					relatorio.AppendFormat("\"{0}\",", consumo.Dias);
+					relatorio.AppendFormat("\"{0}\",", consumo.MediaKmL);
+					relatorio.AppendFormat("\"{0}\",", consumo.PiorKmL);
+					relatorio.AppendFormat("\"{0}\",", consumo.MelhorKmL);
+					relatorio.AppendFormat("\"{0}\"", consumo.ValorGastoKmL);
+					relatorioConsumo.AppendLine(relatorio.ToString());
+				}
+				string folder = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetEntryAssembly().Location);
+				string filePath = string.Format(@"{0}\RelatorioConsumo.csv", folder);
+				System.IO.File.WriteAllText(filePath, relatorioConsumo.ToString());
+				Console.WriteLine("Documento exportado com sucesso.");
 			}
-			//"Honda","City 1.5","564","221.06","73.71","2012-09- 13","22","7.65","7.50","7.80","0.39"
-			//System.Console.WriteLine(veiculo.Marca + " " + veiculo.Modelo + " abatecimentos: " + veiculo.Abastecimentos.Count);
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex.Message);
+			}
 		}
 		DateTime BuscaPrimeiroAbastecimento(IList<Abastecimento> abastecimentos)
 		{
@@ -126,7 +136,7 @@ namespace ControleDeGastos
 				float kmPercorrido = listaDeAbastecimentos[index].Quilometragem - listaDeAbastecimentos[index - 1].Quilometragem;
 				valorAtual = kmPercorrido / listaDeAbastecimentos[index - 1].Combustivel;
 
-				if ((melhorKmL == 0) || (valorAtual < melhorKmL))
+				if ((melhorKmL == 0) || (valorAtual > melhorKmL))
 					melhorKmL = valorAtual;
 			}
 			return melhorKmL;
@@ -143,7 +153,7 @@ namespace ControleDeGastos
 				float kmPercorrido = listaDeAbastecimentos[index].Quilometragem - listaDeAbastecimentos[index - 1].Quilometragem;
 				valorAtual = kmPercorrido / listaDeAbastecimentos[index - 1].Combustivel;
 
-				if ((piorKmL == 0) || (valorAtual > piorKmL))
+				if ((piorKmL == 0) || (valorAtual < piorKmL))
 					piorKmL = valorAtual;
 			}
 			return piorKmL;

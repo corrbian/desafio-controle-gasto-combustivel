@@ -46,8 +46,13 @@ namespace ControleDeGastos
 			if (string.IsNullOrEmpty(caminhoArquivo))
 				Console.WriteLine("Caminho para o arquivo não foi informado.");
 
-			Controle control = new Controle();
-			control.Carregar(caminhoArquivo);
+			if (!System.IO.File.Exists(caminhoArquivo))
+				Console.WriteLine("Caminho inexistente.");
+			else
+			{
+				Controle control = new Controle();
+				control.Carregar(caminhoArquivo);
+			}
 
 			//Pausa para informar o usuário sobre os acontecimentos do sistema.
 			Console.Read();

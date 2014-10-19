@@ -2,9 +2,9 @@ Desafio de Programação – Cálculo de Consumo de Combustível
 Dado um arquivo LogCombustivel.csv com registro de veículos e abastecimentos de
 combustível, desenvolver um programa que interprete o arquivo de entrada e produza um
 arquivo de saída de nome RelatorioConsumo.csv, que calcule, por veículo, os seguintes
-valores:
-•  A quilometragem total no período (Km)
-•  O custo total com combustível no período (R$)
+valores:<br />
+•  A quilometragem total no período (Km)<br />
+•  O custo total com combustível no período (R$)<br />
 •  O consumo total de combustível no período (Litros)
 •  Data inicial do período e total de dias
 •  O consumo médio de combustível (Km/L)
